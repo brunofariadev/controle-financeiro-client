@@ -1,0 +1,41 @@
+<nav>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active">Sessões</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md">
+    <h1 class="h2 border-left pl-2">
+      Sessões
+    </h1>
+  </div>
+  <div class="col-md">
+    <a routerLink="novo" class="btn btn-success float-right">
+      + Nova Sessão
+    </a>
+  </div>
+</div>
+
+<div class="card">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Data Sessão</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sessao of sessoes">
+        <td>{{sessao.NomeDoCliente}}</td>
+        <td>{{sessao.dataDaSessao}}</td>
+        <td>
+          <a [routerLink]="[sessao.id, 'edite']" class="btn btn-outline-info btn-sm">Editar</a>
+          <button (click)="Remova(sessao)" class="btn btn-outline-danger btn-sm ml-2">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

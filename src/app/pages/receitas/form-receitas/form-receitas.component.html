@@ -1,0 +1,136 @@
+<nav>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item"><a routerLink="/receitas">Receitas</a></li>
+    <li class="breadcrumb-item active">{{pageTitle}}</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md">
+    <h1 class="h2 border-left pl-2">
+      {{pageTitle}}
+    </h1>
+  </div>
+  <div class="col-md">
+    <a routerLink="/receitas" class="btn btn-light float-right">
+      Voltar
+    </a>
+  </div>
+</div>
+
+<form [formGroup]="receitaForm" (submit)="submitForm()">
+  <div class="card">
+    <div class="card-body">
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="tipoDaReceita">Tipo de receita</label>
+
+          <select [(ngModel)]="selectedTipo" name="tipoDaReceita" id="tipoDaReceita" formControlName="tipoDaReceita"
+            class="form-control">
+            <option value="0">Selecione...</option>
+            <option *ngFor="let tipo of tipos" [value]="tipo.value">{{tipo.text}}</option>
+          </select>
+
+          <div class="text-danger"
+            *ngIf="receitaForm.get('tipoDaReceita').value == 0 || (receitaForm.get('tipoDaReceita').invalid && receitaForm.get('tipoDaReceita').touched)">
+            <div *ngIf="receitaForm.get('tipoDaReceita').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+        <div [hidden]="receitaForm.get('tipoDaReceita').value != '1'" class="form-group col-md-8">
+          <label for="sessaoId">Sessões</label>
+          <select name="sessaoId" id="sessaoId" formControlName="sessaoId" class="form-control">
+            <option value="0">Selecione...</option>
+            <option [value]="sessao.id" *ngFor="let sessao of sessoes">
+              {{sessao.DescricaoCompleta}}
+            </option>
+          </select>
+
+          <div class="text-danger" *ngIf="receitaForm.get('tipoDaReceita').value == '1' && (receitaForm.get('tipoDaReceita').value == 0 || 
+          (receitaForm.get('sessaoId').invalid && receitaForm.get('sessaoId').touched))">
+            <div *ngIf="receitaForm.get('sessaoId').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+        <div [hidden]="receitaForm.get('tipoDaReceita').value != '2'" class="form-group col-md-8">
+          <label for="descricao">Descrição</label>
+          <input type="descricao" class="form-control" id="descricao" formControlName="descricao">
+
+          <div class="text-danger"
+            *ngIf="receitaForm.get('tipoDaReceita').value == '2' && receitaForm.get('descricao').invalid && receitaForm.get('descricao').touched">
+            <div *ngIf="receitaForm.get('descricao').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="valorAReceber">Valor</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">R$</div>
+            </div>
+            <input currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }" type="text"
+              class="form-control text-right" id="valorAReceber" formControlName="valorAReceber">
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="dataDoVencimento">Data do vencimento</label>
+          <p-calendar id="dataDoVencimento" formControlName="dataDoVencimento" inputStyleClass="form-control"
+            dataType="string" dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true">
+          </p-calendar>
+
+          <div class="text-danger"
+            *ngIf="receitaForm.get('dataDoVencimento').invalid && receitaForm.get('dataDoVencimento').touched">
+            <div *ngIf="receitaForm.get('dataDoVencimento').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group col-md-1">
+          <label for="foiPago">Foi Pago?</label>
+          <div class="btn-group">
+            <label (click)="receitaForm.get('foiPago').setValue(true)"
+              [class.active]="receitaForm.get('foiPago').value == true" class="btn btn-outline-success">
+              Sim
+            </label>
+            <label (click)="receitaForm.get('foiPago').setValue(false)"
+              [class.active]="receitaForm.get('foiPago').value == false" class="btn btn-outline-danger">
+              Não
+            </label>
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="dataDoPagamento">Data do pagamento</label>
+          <p-calendar [disabled]="!receitaForm.get('foiPago').value" id="dataDoPagamento"
+            formControlName="dataDoPagamento" inputStyleClass="form-control" dataType="string" dateFormat="dd/mm/yy"
+            [locale]="ptBR" [showButtonBar]="true">
+          </p-calendar>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="formaDePagamento">Forma de pagamento</label>
+          <select [attr.disabled]="receitaForm.get('foiPago').value ? null : ''" name="formaDePagamento"
+            id="formaDePagamento" formControlName="formaDePagamento" class="form-control">
+            <option value="0">Selecione...</option>
+            <option *ngFor="let formaDePagamento of formasDePagamento" [value]="formaDePagamento.value">
+              {{formaDePagamento.text}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="observacao">Observação</label>
+          <textarea rows="5" class="form-control" id="observacao" formControlName="observacao"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-danger mt-4" *ngIf="serverErrorMessages">
+    <strong>Erro no servidor</strong>
+    <ul>
+      <li *ngFor="let error of serverErrorMessages">
+        {{error}}
+      </li>
+    </ul>
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-lg float-right mt-3">Salvar</button>
+
+</form>

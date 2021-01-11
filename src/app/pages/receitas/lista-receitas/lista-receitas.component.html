@@ -1,0 +1,124 @@
+<nav>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active">Receitas</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md">
+    <h1 class="h2 border-left pl-2">
+      Receitas
+    </h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="alert alert-success" role="alert" style="padding-top: 0.4rem; padding-bottom: 0.4rem; 
+    padding-right: 1rem; padding-left: 1rem;">
+      Recebido: <strong>{{receitaTotal.recebido}}</strong>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="alert alert-danger" role="alert" style="padding-top: 0.4rem; padding-bottom: 0.4rem; 
+    padding-right: 1rem; padding-left: 1rem;">
+      À Receber: <strong>{{receitaTotal.aReceber}}</strong>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="alert alert-primary" role="alert" style="padding-top: 0.4rem; padding-bottom: 0.4rem; 
+    padding-right: 1rem; padding-left: 1rem;">
+      Total: <strong>{{receitaTotal.total}}</strong>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <a routerLink="novo" class="btn btn-success float-right">
+      + Nova Receita
+    </a>
+    <button class="btn btn-primary float-right mr-1" type="button" data-toggle="collapse" data-target="#collapseFilter"
+      aria-expanded="false" aria-controls="collapseFilter">
+      Filtros
+    </button>
+  </div>
+</div>
+<form [formGroup]="buscaForm" (submit)="submitBuscaForm()" class="collapse mb-2" id="collapseFilter">
+  <div class="card card-body">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="clienteId">Cliente</label>
+        <select name="clienteId" id="clienteId" class="form-control" formControlName="clienteId">
+          <option value="00000000-0000-0000-0000-000000000000">Selecione...</option>
+          <option [value]="cliente.id" *ngFor="let cliente of clientes">
+            {{cliente.nome}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="dataInicio">Data início da sessão</label>
+        <p-calendar id="dataInicio" formControlName="dataInicio" inputStyleClass="form-control" dataType="string"
+          dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true">
+        </p-calendar>
+        <div class="text-danger" *ngIf="buscaForm.get('dataInicio').invalid && buscaForm.get('dataInicio').touched">
+          <div *ngIf="buscaForm.get('dataInicio').errors.required">Dado obrigatório</div>
+        </div>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="dataFim">Data fim da sessão</label>
+        <p-calendar id="dataFim" formControlName="dataFim" inputStyleClass="form-control" dataType="string" dateFormat="dd/mm/yy"
+          [locale]="ptBR" [showButtonBar]="true">
+        </p-calendar>
+        <div class="text-danger" *ngIf="buscaForm.get('dataFim').invalid && buscaForm.get('dataFim').touched">
+          <div *ngIf="buscaForm.get('dataFim').errors.required">Dado obrigatório</div>
+        </div>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="situacao">Situação</label>
+        <select name="situacao" id="situacao" class="form-control" formControlName="situacao">
+          <option value="0">Todas</option>
+          <option *ngFor="let situacao of situacoes" [value]="situacao.value">{{situacao.text}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md">
+        <button [disabled]="buscaForm.invalid" type="submit" class="btn btn-outline-primary btn-sm ml-2 float-right"
+          data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"
+          style="margin-top: 35px;">Buscar</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="card">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Data da sessão</th>
+        <th>Valor a receber</th>
+        <th>Situação</th>
+        <th>Data do vencimento</th>
+        <th>Data do pagamento</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let receita of receitas">
+        <td>{{receita.sessao.cliente.nome}}</td>
+        <td>{{receita.sessao.dataDaSessao}}</td>
+        <td>{{receita.valorAReceber | brazilianCurrency}}</td>
+        <td>
+          <strong [class.text-success]="receita.foiPago" [class.text-danger]="!receita.foiPago">
+            {{receita.DescricaoDaSituacao}}
+          </strong>
+        </td>
+        <td>{{receita.dataDoVencimento}}</td>
+        <td>{{receita.dataDoPagamento}}</td>
+        <td>
+          <a [routerLink]="[receita.id, 'edite']" class="btn btn-outline-info btn-sm">Editar</a>
+          <button (click)="Remova(receita)" class="btn btn-outline-danger btn-sm ml-2">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
