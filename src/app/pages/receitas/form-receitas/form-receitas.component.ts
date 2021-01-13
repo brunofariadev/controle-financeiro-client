@@ -77,7 +77,7 @@ export class FormReceitasComponent implements OnInit, AfterContentChecked {
   }
 
   loadSessoes(): any {
-    this.sessaoService.getAll().subscribe(sessoes => this.sessoes = sessoes);
+    this.sessaoService.getAll(1, 500).subscribe(pagedSessoes => this.sessoes = pagedSessoes.Items);
   }
 
   setCurrentAction(): any {

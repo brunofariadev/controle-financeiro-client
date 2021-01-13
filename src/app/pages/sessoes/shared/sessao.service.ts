@@ -6,6 +6,7 @@ import { map, catchError, flatMap } from 'rxjs/operators';
 
 import { Sessao } from './sessao.model';
 import { environment } from 'src/environments/environment';
+import { PagedList } from 'src/app/shared/models/paged-list.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,13 @@ export class SessaoService {
 
   private apiPath: string = 'api/sessoes';
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.apiPath = environment.API_URL + this.apiPath;
   }
 
-  getAll(): Observable<Sessao[]> {
-    return this.http.get(this.apiPath).pipe(
+  getAll(currentPage: number, pageSize: number = 3): Observable<PagedList<Sessao>> {
+    let url = `${this.apiPath}?page=${currentPage}&pageSize=${pageSize}`;
+    return this.http.get(url).pipe(
       catchError(this.handleError),
       map(this.jsonDataToSessaos)
     );
@@ -63,12 +65,16 @@ export class SessaoService {
     return Object.assign(new Sessao(), jsonDataToSessao);
   }
 
-  jsonDataToSessaos(jsonDataToSessaos: any[]): Sessao[] {
+  jsonDataToSessaos(jsonDataToSessaos: any): PagedList<Sessao> {
     let sessoes: Sessao[] = [];
+    let pagedList: PagedList<Sessao> = new PagedList<Sessao>();
 
-    jsonDataToSessaos.forEach(e => sessoes.push(Object.assign(new Sessao(), e)));
+    jsonDataToSessaos.items.forEach(e => sessoes.push(Object.assign(new Sessao(), e)));
+    pagedList.Items = sessoes;
+    pagedList.TotalItems = jsonDataToSessaos.totalItems;
+    pagedList.PageSize = jsonDataToSessaos.pageSize;
 
-    return sessoes;
+    return pagedList;
   }
 
   handleError(erro: any): Observable<any> {

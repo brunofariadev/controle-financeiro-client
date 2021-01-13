@@ -74,21 +74,6 @@ export class ListaReceitasComponent implements OnInit {
     this.clienteService.getAll(1, 500).subscribe(pagedClientes => this.clientes = pagedClientes.Items);
   }
 
-  private loadReceitas() {
-    this.receitaService.getAll().subscribe(receitas => {
-      //TODO: Temporário
-      this.sessaoService.getAll().subscribe(sessoes => {
-        receitas.forEach(receita => {
-          receita.sessao = sessoes.find(sessao => sessao.id == receita.sessaoId);
-          this.receitas.push(receita);
-        });
-      }, error => console.log(error));
-      // this.receitas = receitas;
-    }, error => alert("erro ao carregar lista"));
-  }
-
-
-
   Remova(receita: Receita) {
     this.receitaService.delete(receita.id).subscribe(
       () => this.receitas = this.receitas.filter(receitaAntigo => receitaAntigo != receita),

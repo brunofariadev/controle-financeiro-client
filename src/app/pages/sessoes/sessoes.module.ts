@@ -8,6 +8,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 // import { IMaskModule } from 'angular-imask';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { CalendarModule } from 'primeng/calendar';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { CalendarModule } from 'primeng/calendar';
     FormsModule,
     CurrencyMaskModule,
     CalendarModule,
+    SharedModule
     // IMaskModule
   ]
 })

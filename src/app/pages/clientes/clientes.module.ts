@@ -7,16 +7,17 @@ import { FormClientesComponent } from './form-clientes/form-clientes.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
 import { CurrencyMaskModule } from "ng2-currency-mask";
-import { PaginadorComponent } from 'src/app/shared/componentes/paginador/paginador.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
-  declarations: [ListaClientesComponent, FormClientesComponent, PaginadorComponent],
+  declarations: [ListaClientesComponent, FormClientesComponent],
   imports: [
     CommonModule,
     ClientesRoutingModule,
     ReactiveFormsModule,
     CalendarModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    SharedModule
   ]
 })
 export class ClientesModule { }
