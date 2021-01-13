@@ -8,6 +8,7 @@ import { Receita } from './receita.model';
 import { environment } from 'src/environments/environment';
 import { ReceitaTotal } from './receita-total.model';
 import { FiltrosReceita } from './filtros-receita.model';
+import { PagedList } from 'src/app/shared/models/paged-list.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +21,12 @@ export class ReceitaService {
     this.apiPath = environment.API_URL + this.apiPath;
   }
 
-  getAll(): Observable<Receita[]> {
-    return this.http.get(this.apiPath).pipe(
-      catchError(this.handleError),
-      map(this.jsonDataToReceitas)
-    );
-  }
+  // getAll(): Observable<Receita[]> {
+  //   return this.http.get(this.apiPath).pipe(
+  //     catchError(this.handleError),
+  //     map(this.jsonDataToReceitas)
+  //   );
+  // }
 
   getById(id: string): Observable<Receita> {
     let url = `${this.apiPath}/${id}`;
@@ -36,7 +37,7 @@ export class ReceitaService {
     );
   }
 
-  buscarReceitas(filtros: FiltrosReceita): Observable<Receita[]> {
+  buscarReceitas(filtros: FiltrosReceita): Observable<PagedList<Receita>> {
     let url = `${this.apiPath}/buscar`;
     return this.http.get(url, { params: this.getParams(filtros) }).pipe(
       catchError(this.handleError),
@@ -85,12 +86,16 @@ export class ReceitaService {
     return Object.assign(new Receita(), jsonDataToReceita);
   }
 
-  jsonDataToReceitas(jsonDataToReceitas: any[]): Receita[] {
+  jsonDataToReceitas(jsonDataToReceitas: any): PagedList<Receita> {
     let receitas: Receita[] = [];
+    let pagedList: PagedList<Receita> = new PagedList<Receita>();
 
-    jsonDataToReceitas.forEach(e => receitas.push(Object.assign(new Receita(), e)));
+    jsonDataToReceitas.items.forEach(e => receitas.push(Object.assign(new Receita(), e)));
+    pagedList.Items = receitas;
+    pagedList.TotalItems = jsonDataToReceitas.totalItems;
+    pagedList.PageSize = jsonDataToReceitas.pageSize;
 
-    return receitas;
+    return pagedList;
   }
 
   handleError(erro: any): Observable<any> {

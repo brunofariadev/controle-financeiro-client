@@ -1,4 +1,6 @@
-export class FiltrosReceita {
+import { Paginacao } from "src/app/shared/models/paginacao.model";
+
+export class FiltrosReceita extends Paginacao {
     public clienteId: string;
     public dataInicio: string;
     public dataFim: string;

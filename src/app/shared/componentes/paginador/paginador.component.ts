@@ -20,7 +20,6 @@ export class PaginadorComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    debugger;
     this.pagina = this.pagerService.getPager(this.totalDeItens, 1, this.pageSize);
   }
 

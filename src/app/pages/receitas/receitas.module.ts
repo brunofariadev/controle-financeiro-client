@@ -9,6 +9,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { CalendarModule } from 'primeng/calendar';
 import { BrazilianCurrencyPipe } from '../../shared/pipes/brazilian-currency.pipe';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { BrazilianCurrencyPipe } from '../../shared/pipes/brazilian-currency.pip
     FormsModule,
     CurrencyMaskModule,
     CalendarModule,
+    SharedModule
     // IMaskModule
   ]
 })

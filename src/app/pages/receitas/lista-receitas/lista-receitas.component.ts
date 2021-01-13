@@ -34,6 +34,9 @@ export class ListaReceitasComponent implements OnInit {
     clear: 'Limpar'
   };
 
+  quantidadeTotalDeItens: number = 0;
+  pageSize: number = 0;
+
   constructor(private receitaService: ReceitaService,
     private sessaoService: SessaoService,
     private clienteService: ClienteService,
@@ -44,7 +47,7 @@ export class ListaReceitasComponent implements OnInit {
   ngOnInit() {
     this.loadClientes();
     this.buildBuscaForm();
-    this.submitBuscaForm();
+    this.submitBuscaForm(1);
   }
 
   buildBuscaForm(): any {
@@ -81,22 +84,29 @@ export class ListaReceitasComponent implements OnInit {
     );
   }
 
-  submitBuscaForm() {
-    let filtros: FiltrosReceita = this.mapearFiltroReceita();
+  submitBuscaForm(currentPagina: number) {
+    let filtros: FiltrosReceita = this.mapearFiltroReceita(currentPagina);
     this.buscarTotais(filtros);
     this.buscarReceitas(filtros);
   }
 
-  private mapearFiltroReceita() {
+  private mapearFiltroReceita(currentPagina: number) {
     let filtros: FiltrosReceita = Object.assign(new FiltrosReceita(), this.buscaForm.value);
     filtros.dataInicio = filtros.dataInicio.split("/").reverse().join("-");
     filtros.dataFim = filtros.dataFim.split("/").reverse().join("-");
+    filtros.page = currentPagina;
+    filtros.pageSize = 3;
+
     return filtros;
   }
 
   private buscarReceitas(filtros: FiltrosReceita) {
     this.receitaService.buscarReceitas(filtros).subscribe(
-      (receitas) => this.receitas = receitas,
+      pagedReceitas => {
+        this.receitas = pagedReceitas.Items;
+        this.quantidadeTotalDeItens = pagedReceitas.TotalItems;
+        this.pageSize = pagedReceitas.PageSize;
+      },
       () => "Erro ao buscar as receitas"
     );
   }
