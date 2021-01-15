@@ -22,6 +22,8 @@
 <form [formGroup]="clienteForm" (submit)="submitForm()">
   <div class="card">
     <div class="card-body">
+      <!-- <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown> -->
+
       <div class="form-row">
         <div class="form-group col-md-5">
           <label for="nome">Nome</label>
@@ -41,10 +43,16 @@
         </div>
         <div class="form-group col-md-2">
           <label for="sexo">Sexo</label>
+          <!-- <p-dropdown styleClass="form-control" formControlName="sexo" [options]="sexos" optionLabel="text"
+            optionValue="value"></p-dropdown> -->
           <select name="sexo" id="sexo" formControlName="sexo" class="form-control">
             <option value="0">Selecione...</option>
             <option *ngFor="let sexo of sexos" [value]="sexo.value">{{sexo.text}}</option>
           </select>
+
+          <div class="text-danger" *ngIf="(clienteForm.get('sexo').invalid && clienteForm.get('sexo').touched)">
+            <div *ngIf="clienteForm.get('sexo').errors.required">Dado obrigatório</div>
+          </div>
         </div>
         <div class="form-group col-md-2">
           <label for="estadoCivil">Estado Civil</label>

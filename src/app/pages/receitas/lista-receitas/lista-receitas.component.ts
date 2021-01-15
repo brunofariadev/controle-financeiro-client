@@ -36,6 +36,7 @@ export class ListaReceitasComponent implements OnInit {
 
   quantidadeTotalDeItens: number = 0;
   pageSize: number = 0;
+  situacoes: Array<any>;
 
   constructor(private receitaService: ReceitaService,
     private sessaoService: SessaoService,
@@ -48,6 +49,8 @@ export class ListaReceitasComponent implements OnInit {
     this.loadClientes();
     this.buildBuscaForm();
     this.submitBuscaForm(1);
+
+    this.situacoes = UtilOptions.getOptions(FiltrosReceita.situacoes);
   }
 
   buildBuscaForm(): any {
@@ -116,9 +119,4 @@ export class ListaReceitasComponent implements OnInit {
       this.receitaTotal = receitaTotal,
       error => alert("erro ao carregar totais"))
   }
-
-  get situacoes() {
-    return UtilOptions.getOptions(FiltrosReceita.situacoes);
-  }
-
 }

@@ -34,12 +34,16 @@ export class FormClientesComponent implements OnInit, AfterContentChecked {
     clear: 'Limpar'
   };
 
+  sexos: Array<any>;
+  estadosCivis: Array<any>;
+  escolaridades: Array<any>;
+
   constructor(
     private clienteService: ClienteService,
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder
-  ) { }
+  ) {  }
 
   ngAfterContentChecked(): void {
     this.setPageTitle();
@@ -58,6 +62,10 @@ export class FormClientesComponent implements OnInit, AfterContentChecked {
     this.setCurrentAction();
     this.buildClienteForm();
     this.loadCliente();
+    
+    this.sexos = UtilOptions.getOptions(Cliente.sexoEnum);
+    this.estadosCivis = UtilOptions.getOptions(Cliente.estadoCivilEnum);
+    this.escolaridades = UtilOptions.getOptions(Cliente.escolaridadeEnum);
   }
 
   setCurrentAction(): any {
@@ -76,7 +84,7 @@ export class FormClientesComponent implements OnInit, AfterContentChecked {
       idade: [null, [Validators.required]],
       dataDeNascimento: [null, [Validators.required]],
       estadoCivil: [0],
-      sexo: [0],
+      sexo: [0, [Validators.required]],
       rg: [null],
       cpf: [null],
       escolaridade: [0],
@@ -165,17 +173,5 @@ export class FormClientesComponent implements OnInit, AfterContentChecked {
       cliente => this.actionFormSuccess(cliente),
       error => this.actionsFormError(error)
     )
-  }
-
-  get sexos(): Array<any> {
-    return UtilOptions.getOptions(Cliente.sexoEnum);
-  }
-
-  get estadosCivis(): Array<any> {
-    return UtilOptions.getOptions(Cliente.estadoCivilEnum);
-  }
-
-  get escolaridades(): Array<any> {
-    return UtilOptions.getOptions(Cliente.escolaridadeEnum);
   }
 }

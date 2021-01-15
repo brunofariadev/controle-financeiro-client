@@ -47,6 +47,9 @@ export class FormReceitasComponent implements OnInit, AfterContentChecked {
   //   radix: ","
   // }
 
+  tipos: Array<any>;
+  formasDePagamento: Array<any>;
+
   constructor(
     private receitaService: ReceitaService,
     private route: ActivatedRoute,
@@ -74,6 +77,9 @@ export class FormReceitasComponent implements OnInit, AfterContentChecked {
     this.buildReceitaForm();
     this.loadReceita();
     this.loadSessoes();
+
+    this.tipos = UtilOptions.getOptions(Receita.tipos);
+    this.formasDePagamento = UtilOptions.getOptions(Receita.formasDePagamento);
   }
 
   loadSessoes(): any {
@@ -186,13 +192,5 @@ export class FormReceitasComponent implements OnInit, AfterContentChecked {
       receita => this.actionFormSuccess(receita),
       error => this.actionsFormError(error)
     )
-  }
-
-  get tipos(): Array<any> {
-    return UtilOptions.getOptions(Receita.tipos);
-  }
-
-  get formasDePagamento(): Array<any> {
-    return UtilOptions.getOptions(Receita.formasDePagamento);
   }
 }
