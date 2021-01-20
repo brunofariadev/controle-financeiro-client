@@ -23,7 +23,7 @@ export class FormSessoesComponent implements OnInit, AfterContentChecked {
   serverErrorMessages: string[] = null;
   submittingForm: boolean = false;
   sessao: Sessao = new Sessao();
-  clientes: Cliente[];
+  clientes: ClienteOption[] = [];
   ptBR = {
     firstDayOfWeek: 0,
     dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
@@ -65,7 +65,7 @@ export class FormSessoesComponent implements OnInit, AfterContentChecked {
   }
 
   loadClientes(): any {
-    this.clienteService.getAll(1, 500).subscribe(pagedClientes => this.clientes = pagedClientes.Items);
+    this.clienteService.getAll(1, 500).subscribe(pagedClientes => this.clientes = pagedClientes.Items.map(c => new ClienteOption(c.nome, c.id)));
   }
 
   setCurrentAction(): any {
@@ -147,3 +147,14 @@ export class FormSessoesComponent implements OnInit, AfterContentChecked {
     )
   }
 }
+
+export class ClienteOption {
+  public label: string;
+  public value: string;
+
+  constructor(label: string, value: string) {
+    this.label = label;
+    this.value = value;
+  }
+
+} 

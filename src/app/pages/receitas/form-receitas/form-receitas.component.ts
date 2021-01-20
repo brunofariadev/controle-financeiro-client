@@ -24,7 +24,7 @@ export class FormReceitasComponent implements OnInit, AfterContentChecked {
   serverErrorMessages: string[] = null;
   submittingForm: boolean = false;
   receita: Receita = new Receita();
-  sessoes: Sessao[];
+  sessoes: SessaoOption[] = [];
   selectedTipo: string;
 
   ptBR = {
@@ -83,7 +83,7 @@ export class FormReceitasComponent implements OnInit, AfterContentChecked {
   }
 
   loadSessoes(): any {
-    this.sessaoService.getAll(1, 500).subscribe(pagedSessoes => this.sessoes = pagedSessoes.Items);
+    this.sessaoService.getAll(1, 500).subscribe(pagedSessoes => this.sessoes = pagedSessoes.Items.map(s => new SessaoOption(s.DescricaoCompleta, s.id)));
   }
 
   setCurrentAction(): any {
@@ -194,3 +194,14 @@ export class FormReceitasComponent implements OnInit, AfterContentChecked {
     )
   }
 }
+
+export class SessaoOption {
+  public label: string;
+  public value: string;
+
+  constructor(label: string, value: string) {
+    this.label = label;
+    this.value = value;
+  }
+
+} 

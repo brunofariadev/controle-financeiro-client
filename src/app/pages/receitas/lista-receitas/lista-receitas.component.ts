@@ -10,15 +10,20 @@ import { UtilOptions } from '../../../shared/util.options';
 import { FiltrosReceita } from '../shared/filtros-receita.model';
 import { ReceitaTotal } from '../shared/receita-total.model';
 
+interface City {
+  label: string,
+  value: string
+}
+
 @Component({
   selector: 'app-lista-receitas',
   templateUrl: './lista-receitas.component.html',
-  styleUrls: ['./lista-receitas.component.sass']
+  styleUrls: ['./lista-receitas.component.scss']
 })
 export class ListaReceitasComponent implements OnInit {
 
   receitas: Receita[] = [];
-  clientes: Cliente[] = [];
+  clientes: ClienteOption[] = [];
   buscaForm: FormGroup;
   receitaTotal: ReceitaTotal;
 
@@ -39,7 +44,6 @@ export class ListaReceitasComponent implements OnInit {
   situacoes: Array<any>;
 
   constructor(private receitaService: ReceitaService,
-    private sessaoService: SessaoService,
     private clienteService: ClienteService,
     private formBuilder: FormBuilder) {
     this.receitaTotal = new ReceitaTotal();
@@ -77,7 +81,8 @@ export class ListaReceitasComponent implements OnInit {
   }
 
   private loadClientes(): any {
-    this.clienteService.getAll(1, 500).subscribe(pagedClientes => this.clientes = pagedClientes.Items);
+    this.clienteService.getAll(1, 500)
+      .subscribe(pagedClientes => this.clientes = pagedClientes.Items.map(c => new ClienteOption(c.nome, c.id)));
   }
 
   Remova(receita: Receita) {
@@ -120,3 +125,14 @@ export class ListaReceitasComponent implements OnInit {
       error => alert("erro ao carregar totais"))
   }
 }
+
+export class ClienteOption {
+  public label: string;
+  public value: string;
+
+  constructor(label: string, value: string) {
+    this.label = label;
+    this.value = value;
+  }
+
+} 

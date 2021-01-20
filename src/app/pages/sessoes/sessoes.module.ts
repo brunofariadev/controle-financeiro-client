@@ -9,6 +9,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { CalendarModule } from 'primeng/calendar';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     CurrencyMaskModule,
     CalendarModule,
-    SharedModule
+    SharedModule,
+    ScrollingModule,
+    DropdownModule
     // IMaskModule
   ]
 })

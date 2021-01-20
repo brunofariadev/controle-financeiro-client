@@ -39,12 +39,15 @@
         </div>
         <div [hidden]="receitaForm.get('tipoDaReceita').value != '1'" class="form-group col-md-8">
           <label for="sessaoId">Sessões</label>
-          <select name="sessaoId" id="sessaoId" formControlName="sessaoId" class="form-control">
+          <p-dropdown #dd placeholder="Selecione..." [options]="sessoes" formControlName="sessaoId" filter="true"
+            [style]="{'width':'100%'}"></p-dropdown>
+
+          <!-- <select name="sessaoId" id="sessaoId" formControlName="sessaoId" class="form-control">
             <option value="0">Selecione...</option>
             <option [value]="sessao.id" *ngFor="let sessao of sessoes">
               {{sessao.DescricaoCompleta}}
             </option>
-          </select>
+          </select> -->
 
           <div class="text-danger" *ngIf="receitaForm.get('tipoDaReceita').value == '1' && (receitaForm.get('tipoDaReceita').value == 0 || 
           (receitaForm.get('sessaoId').invalid && receitaForm.get('sessaoId').touched))">
@@ -75,7 +78,7 @@
         <div class="form-group col-md-2">
           <label for="dataDoVencimento">Data do vencimento</label>
           <p-calendar id="dataDoVencimento" formControlName="dataDoVencimento" inputStyleClass="form-control"
-            dataType="string" dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true">
+            dataType="string" dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true" [style]="{'width':'100%'}">
           </p-calendar>
 
           <div class="text-danger"
@@ -100,7 +103,7 @@
           <label for="dataDoPagamento">Data do pagamento</label>
           <p-calendar [disabled]="!receitaForm.get('foiPago').value" id="dataDoPagamento"
             formControlName="dataDoPagamento" inputStyleClass="form-control" dataType="string" dateFormat="dd/mm/yy"
-            [locale]="ptBR" [showButtonBar]="true">
+            [style]="{'width':'100%'}" [locale]="ptBR" [showButtonBar]="true">
           </p-calendar>
         </div>
         <div class="form-group col-md-3">

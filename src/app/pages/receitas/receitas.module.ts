@@ -10,7 +10,9 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
 import { CalendarModule } from 'primeng/calendar';
 import { BrazilianCurrencyPipe } from '../../shared/pipes/brazilian-currency.pipe';
 import { SharedModule } from 'src/app/shared/shared.module';
-
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { DropdownModule } from 'primeng/dropdown';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [ListaReceitasComponent, FormReceitasComponent, BrazilianCurrencyPipe],
@@ -21,7 +23,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     CurrencyMaskModule,
     CalendarModule,
-    SharedModule
+    SharedModule,
+    AutoCompleteModule,
+    ScrollingModule,
+    DropdownModule
     // IMaskModule
   ]
 })
