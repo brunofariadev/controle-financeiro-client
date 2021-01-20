@@ -2,8 +2,11 @@ import { Routes } from '@angular/router';
 
 export const AdminLayoutRoutes: Routes = [
     {
+        path: 'dashboard',
+        loadChildren: () => import('../../pages/dashboard/dashboard.module').then(m => m.DashboardModule)
+    },
+    {
         path: 'clientes',
-        //loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule),
         loadChildren: () => import('../../pages/clientes/clientes.module').then(m => m.ClientesModule)
     },
     {

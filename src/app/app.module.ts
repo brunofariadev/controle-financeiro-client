@@ -6,12 +6,14 @@ import { AppRoutes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 import { InMemoryDatabase } from "./in-memory-database";
 import { FormsModule } from '@angular/forms';
-import { PaginadorComponent } from './shared/componentes/paginador/paginador.component';
+import { AuthInterceptor } from './helpers/auth.interceptor';
+import { ErrorInterceptor } from './helpers/error.interceptor';
+import { LoginModule } from './pages/login/login.module';
 
 // import { BrazilianCurrencyPipe } from './shared/pipes/brazilian-currency.pipe';
 
@@ -22,6 +24,7 @@ import { PaginadorComponent } from './shared/componentes/paginador/paginador.com
   ],
   imports: [
     BrowserModule,
+    LoginModule,
     RouterModule.forRoot(AppRoutes, { useHash: true }),
     // HttpClientInMemoryWebApiModule.forRoot(InMemoryDatabase),
     HttpClientModule,
@@ -30,7 +33,10 @@ import { PaginadorComponent } from './shared/componentes/paginador/paginador.com
   ],
   exports: [
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
