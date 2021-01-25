@@ -1,0 +1,23 @@
+<nav class="text-center">
+    <ul *ngIf="pagina.pages && pagina.pages.length" class="pagination">
+        <li class="page-item" [ngClass]="{disabled:pagina.currentPage === 1}">
+            <a class="page-link" href="javascript:void(0)" (click)="setPage(1, pagina.currentPage === 1)">Primeira</a>
+        </li>
+        <li class="page-item" [ngClass]="{disabled:pagina.currentPage === 1}">
+            <a class="page-link" href="javascript:void(0)"
+                (click)="setPage(pagina.currentPage - 1, pagina.currentPage === 1)">Anterior</a>
+        </li>
+        <li class="page-item" *ngFor="let page of pagina.pages" [ngClass]="{active:pagina.currentPage === page}">
+            <a class="page-link" href="javascript:void(0)"
+                (click)="setPage(page, pagina.currentPage === page)">{{page}}</a>
+        </li>
+        <li class="page-item" [ngClass]="{disabled:pagina.currentPage === pagina.totalPages}">
+            <a class="page-link" href="javascript:void(0)"
+                (click)="setPage(pagina.currentPage + 1, pagina.currentPage === pagina.totalPages)">Próximo</a>
+        </li>
+        <li class="page-item" [ngClass]="{disabled:pagina.currentPage === pagina.totalPages}">
+            <a class="page-link" href="javascript:void(0)"
+                (click)="setPage(pagina.totalPages, pagina.currentPage === pagina.totalPages)">Útilmo</a>
+        </li>
+    </ul>
+</nav>

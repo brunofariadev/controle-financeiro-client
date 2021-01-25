@@ -1,0 +1,171 @@
+<nav>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item"><a routerLink="/clientes">Clientes</a></li>
+    <li class="breadcrumb-item active">{{pageTitle}}</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md">
+    <h1 class="h2 border-left pl-2">
+      {{pageTitle}}
+    </h1>
+  </div>
+  <div class="col-md">
+    <a routerLink="/clientes" class="btn btn-light float-right">
+      Voltar
+    </a>
+  </div>
+</div>
+
+<form [formGroup]="clienteForm" (submit)="submitForm()">
+  <div class="card">
+    <div class="card-body">
+      <div class="form-row">
+        <div class="form-group col-md-5">
+          <label for="nome">Nome</label>
+          <input type="text" class="form-control" id="nome" formControlName="nome" maxlength="100">
+
+          <div class="text-danger" *ngIf="clienteForm.get('nome').invalid && clienteForm.get('nome').touched">
+            <div *ngIf="clienteForm.get('nome').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group col-md-1">
+          <label for="idade">Idade</label>
+          <input type="number" class="form-control" id="idade" formControlName="idade">
+
+          <div class="text-danger" *ngIf="clienteForm.get('idade').invalid && clienteForm.get('idade').touched">
+            <div *ngIf="clienteForm.get('idade').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="sexo">Sexo</label>
+          <!-- <p-dropdown styleClass="form-control" formControlName="sexo" [options]="sexos" optionLabel="text"
+            optionValue="value"></p-dropdown> -->
+          <select name="sexo" id="sexo" formControlName="sexo" class="form-control">
+            <option value="0">Selecione...</option>
+            <option *ngFor="let sexo of sexos" [value]="sexo.value">{{sexo.text}}</option>
+          </select>
+
+          <div class="text-danger" *ngIf="(clienteForm.get('sexo').invalid && clienteForm.get('sexo').touched)">
+            <div *ngIf="clienteForm.get('sexo').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="estadoCivil">Estado Civil</label>
+          <select name="estadoCivil" id="estadoCivil" formControlName="estadoCivil" class="form-control">
+            <option value="0">Selecione...</option>
+            <option *ngFor="let estadoCivil of estadosCivis" [value]="estadoCivil.value">{{estadoCivil.text}}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="dataDeNascimento">Data do nascimento</label>
+          <p-calendar id="dataDeNascimento" formControlName="dataDeNascimento" inputStyleClass="form-control"
+            dataType="string" dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true" [style]="{'width':'100%'}">
+          </p-calendar>
+          <div class="text-danger"
+            *ngIf="clienteForm.get('dataDeNascimento').invalid && clienteForm.get('dataDeNascimento').touched">
+            <div *ngIf="clienteForm.get('dataDeNascimento').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="profissao">Profissão</label>
+          <input type="text" class="form-control" id="profissao" formControlName="profissao">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="escolaridade">Escolaridade</label>
+          <select name="escolaridade" id="escolaridade" formControlName="escolaridade" class="form-control">
+            <option value="0">Selecione...</option>
+            <option *ngFor="let escolaridade of escolaridades" [value]="escolaridade.value">{{escolaridade.text}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email" formControlName="email">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="rg">RG</label>
+          <input type="text" class="form-control" id="rg" formControlName="rg">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="cpf">CPF</label>
+          <input type="text" class="form-control" id="cpf" formControlName="cpf">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="telefone">Telefone</label>
+          <input type="text" class="form-control" id="telefone" formControlName="telefone">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="valorSessao">Valor da Sessão</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">R$</div>
+            </div>
+            <input currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }" type="text"
+              class="form-control text-right" id="valorSessao" formControlName="valorSessao">
+          </div>
+
+          <div class="text-danger"
+            *ngIf="clienteForm.get('valorSessao').invalid && clienteForm.get('valorSessao').touched">
+            <div *ngIf="clienteForm.get('valorSessao').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+      </div>
+      <div formGroupName="endereco">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="cep">CEP</label>
+            <input type="text" class="form-control" id="cep" formControlName="cep">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="logradouro">Logradouro</label>
+            <input type="text" class="form-control" id="logradouro" formControlName="logradouro">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="numero">Número</label>
+            <input type="text" class="form-control" id="numero" formControlName="numero">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="bairro">Bairro</label>
+            <input type="text" class="form-control" id="bairro" formControlName="bairro">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="cidade">Cidade</label>
+            <input type="text" class="form-control" id="cidade" formControlName="cidade">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="estado">Estado</label>
+            <input type="text" class="form-control" id="estado" formControlName="estado">
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="observacao">Observação</label>
+          <textarea rows="5" class="form-control" id="observacao" formControlName="observacao"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-danger mt-4" *ngIf="serverErrorMessages">
+    <strong>Erro no servidor</strong>
+    <ul>
+      <li *ngFor="let error of serverErrorMessages">
+        {{error}}
+      </li>
+    </ul>
+  </div>
+
+  <button [disabled]="submittingForm || clienteForm.invalid" type="submit"
+    class="btn btn-primary btn-lg float-right mt-3">Salvar</button>
+
+</form>

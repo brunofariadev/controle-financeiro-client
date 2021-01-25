@@ -1,0 +1,48 @@
+<nav>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active">Clientes</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md">
+    <h1 class="h2 border-left pl-2">
+      Clientes
+    </h1>
+  </div>
+  <div class="col-md">
+    <a routerLink="novo" class="btn btn-success float-right">
+      + Novo Cliente
+    </a>
+  </div>
+</div>
+
+<div class="card">
+  <table class="table table-hover mt-5">
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>E-mail</th>
+        <th>Telefone</th>
+        <th>Valor por sessão</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientes">
+        <td>{{cliente.nome}}</td>
+        <td>{{cliente.email}}</td>
+        <td>{{cliente.telefone}}</td>
+        <td>{{cliente.valorSessao}}</td>
+        <td>
+          <a [routerLink]="[cliente.id, 'edite']" class="btn btn-outline-info btn-sm">Editar</a>
+          <button (click)="Remova(cliente)" class="btn btn-outline-danger btn-sm ml-2">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <app-paginador [totalDeItens]="quantidadeTotalDeItens || 0" [pageSize]="pageSize"
+    (aoMudarDePagina)="obtenhaTodos($event)">
+  </app-paginador>
+</div>
