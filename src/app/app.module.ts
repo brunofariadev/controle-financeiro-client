@@ -25,7 +25,6 @@ import { LoginModule } from './pages/login/login.module';
   imports: [
     BrowserModule,
     LoginModule,
-    
     RouterModule.forRoot(AppRoutes, { useHash: true }),
     // HttpClientInMemoryWebApiModule.forRoot(InMemoryDatabase),
     HttpClientModule,
