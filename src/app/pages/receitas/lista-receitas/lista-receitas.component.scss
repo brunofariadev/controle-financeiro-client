@@ -1,0 +1,53 @@
+.empty-state-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    min-height: 40vh;
+
+    img {
+        max-width: 90px;
+    }
+
+    h2 {
+        font-size: 14px;
+        text-align: center;
+        font-weight: 600;
+        margin-top: 20px;
+    }
+}
+
+.cs-accent-card {
+    background-color: #7386D5;
+    position: relative;
+    display: block;
+    height: 3px;
+}
+
+.cs-card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100px;
+    font-size: 18px;
+    font-weight: 300;
+    background-repeat: no-repeat;
+    background-position: 100% 0;
+    margin: 0 24px;
+    line-height: 100px;
+}
+
+.title-page {
+    padding: 26px 26px 26px 0;
+    min-width: 240px;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}

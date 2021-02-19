@@ -25,7 +25,19 @@ export class Receita {
         4: "Transferência bancária"
     };
 
+    get DescricaoDoTipo(): string {
+        return Receita.tipos[this.tipoDaReceita];
+    }
+
+    get DescricaoClienteOuAvulso(): string {
+        return this.tipoDaReceita == 1 ? this.sessao.cliente.nome : this.descricao;
+    }
+
     get DescricaoDaSituacao(): string {
         return this.foiPago ? "Pago" : "Não pago";
+    }
+
+    get DataDaSessao(): string {
+        return this.tipoDaReceita == 1 ? this.sessao.dataDaSessao : "";
     }
 }
