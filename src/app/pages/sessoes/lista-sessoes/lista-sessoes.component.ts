@@ -6,7 +6,7 @@ import { SessaoService } from '../shared/sessao.service';
 @Component({
   selector: 'app-lista-sessoes',
   templateUrl: './lista-sessoes.component.html',
-  styleUrls: ['./lista-sessoes.component.sass']
+  styleUrls: ['./lista-sessoes.component.scss']
 })
 export class ListaSessoesComponent implements OnInit {
 

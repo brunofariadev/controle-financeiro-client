@@ -39,11 +39,6 @@
     line-height: 100px;
 }
 
-.title-page {
-    padding: 26px 26px 26px 0;
-    min-width: 240px;
-}
-
 .header {
     width: 100%;
     display: flex;
@@ -52,31 +47,6 @@
     justify-content: flex-end;
 }
 
-.search {
-    padding: 1.25rem;
-}
-
 .cs-card-content {
     border-top: 1px solid #e2e7e8;
-}
-
-.totais {
-    // font-weight: 300;
-    font-size: 14px;
-    text-align: center;
-    padding: 5px;
-
-    .recebido {
-        font-size: 16px;
-        color: #9fcc3b;
-    }
-
-    .a-receber {
-        font-size: 16px;
-        color: #cc623b;
-    }
-
-    .total {
-        font-size: 16px;
-    }
 }

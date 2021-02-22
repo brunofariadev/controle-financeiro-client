@@ -31,7 +31,7 @@
       Total: <strong>{{receitaTotal.total}}</strong>
     </div>
   </div> -->
-  <!-- <div class="col-md-3">
+<!-- <div class="col-md-3">
 
     <button class="btn btn-primary float-right mr-1" type="button" data-toggle="collapse" data-target="#collapseFilter"
       aria-expanded="false" aria-controls="collapseFilter">
@@ -51,58 +51,56 @@
     </div>
     <!-- <div class="title-page"></div> -->
   </div>
-  <div class="">
+  <div class="search cs-card-content">
     <form [formGroup]="buscaForm" (submit)="submitBuscaForm(1)">
-      <div class="card card-body">
-        <div class="form-row">
-          <div class="form-group col-md-5">
-            <label for="clienteId">Cliente</label>
-            <p-dropdown #dd placeholder="Selecione..." [options]="clientes" formControlName="clienteId" filter="true"
-              [style]="{'width':'100%'}"></p-dropdown>
-            <!-- <p-autoComplete [suggestions]="clientes" (completeMethod)="buscarClientes($event)" [dropdown]="true"
+      <div class="form-row">
+        <div class="form-group col-md-5">
+          <label for="clienteId">Cliente</label>
+          <p-dropdown #dd placeholder="Selecione..." [options]="clientes" formControlName="clienteId" filter="true"
+            [style]="{'width':'100%'}"></p-dropdown>
+          <!-- <p-autoComplete [suggestions]="clientes" (completeMethod)="buscarClientes($event)" [dropdown]="true"
               autoWidth="false" [style]="{'width':'100%'}" formControlName="clienteId"></p-autoComplete> -->
-            <!-- <p-dropdown [options]="clientes" [(ngModel)]="selectedCity" optionLabel="clienteId" formControlName="clienteId"></p-dropdown> -->
-            <!-- <select name="clienteId" id="clienteId" class="form-control" formControlName="clienteId">
+          <!-- <p-dropdown [options]="clientes" [(ngModel)]="selectedCity" optionLabel="clienteId" formControlName="clienteId"></p-dropdown> -->
+          <!-- <select name="clienteId" id="clienteId" class="form-control" formControlName="clienteId">
               <option value="00000000-0000-0000-0000-000000000000">Selecione...</option>
               <option [value]="cliente.id" *ngFor="let cliente of clientes">
                 {{cliente.nome}}
               </option>
             </select> -->
+        </div>
+        <div class="form-group col-md-2">
+          <label for="dataInicio">Data início da sessão</label>
+          <p-calendar id="dataInicio" formControlName="dataInicio" inputStyleClass="form-control" dataType="string"
+            dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true" autoWidth="false" [style]="{'width':'100%'}">
+          </p-calendar>
+          <div class="text-danger" *ngIf="buscaForm.get('dataInicio').invalid && buscaForm.get('dataInicio').touched">
+            <div *ngIf="buscaForm.get('dataInicio').errors.required">Dado obrigatório</div>
           </div>
-          <div class="form-group col-md-2">
-            <label for="dataInicio">Data início da sessão</label>
-            <p-calendar id="dataInicio" formControlName="dataInicio" inputStyleClass="form-control" dataType="string"
-              dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true" autoWidth="false" [style]="{'width':'100%'}">
-            </p-calendar>
-            <div class="text-danger" *ngIf="buscaForm.get('dataInicio').invalid && buscaForm.get('dataInicio').touched">
-              <div *ngIf="buscaForm.get('dataInicio').errors.required">Dado obrigatório</div>
-            </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="dataFim">Data fim da sessão</label>
+          <p-calendar id="dataFim" formControlName="dataFim" inputStyleClass="form-control" dataType="string"
+            dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true" autoWidth="false" [style]="{'width':'100%'}">
+          </p-calendar>
+          <div class="text-danger" *ngIf="buscaForm.get('dataFim').invalid && buscaForm.get('dataFim').touched">
+            <div *ngIf="buscaForm.get('dataFim').errors.required">Dado obrigatório</div>
           </div>
-          <div class="form-group col-md-2">
-            <label for="dataFim">Data fim da sessão</label>
-            <p-calendar id="dataFim" formControlName="dataFim" inputStyleClass="form-control" dataType="string"
-              dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true" autoWidth="false" [style]="{'width':'100%'}">
-            </p-calendar>
-            <div class="text-danger" *ngIf="buscaForm.get('dataFim').invalid && buscaForm.get('dataFim').touched">
-              <div *ngIf="buscaForm.get('dataFim').errors.required">Dado obrigatório</div>
-            </div>
-          </div>
-          <div class="form-group col-md-2">
-            <label for="situacao">Situação</label>
-            <select name="situacao" id="situacao" class="form-control" formControlName="situacao">
-              <option value="0">Todas</option>
-              <option *ngFor="let situacao of situacoes" [value]="situacao.value">{{situacao.text}}</option>
-            </select>
-          </div>
-          <div class="col-md-1">
-            <button [disabled]="buscaForm.invalid" type="submit" class="btn btn-outline-primary btn-sm ml-2 float-right"
-              style="margin-top: 35px;">Buscar</button>
-          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="situacao">Situação</label>
+          <select name="situacao" id="situacao" class="form-control" formControlName="situacao">
+            <option value="0">Todas</option>
+            <option *ngFor="let situacao of situacoes" [value]="situacao.value">{{situacao.text}}</option>
+          </select>
+        </div>
+        <div class="col-md-1">
+          <button [disabled]="buscaForm.invalid" type="submit" class="btn btn-outline-primary btn-sm ml-2 float-right"
+            style="margin-top: 35px;">Buscar</button>
         </div>
       </div>
     </form>
   </div>
-  <div class="card">
+  <div class="cs-card-content">
     <div class="row">
       <div class="col-md-4 totais">
         RECEBIDO
@@ -121,7 +119,7 @@
       </div>
     </div>
   </div>
-  <div class="empty-state-list" *ngIf="!receitas || receitas.length == 0">
+  <div class="empty-state-list cs-card-content" *ngIf="!receitas || receitas.length == 0">
     <img src="../../../../assets/images/empty-state.svg" alt="">
     <h2>Nenhuma receita encontrada de acordo com os filtros aplicados</h2>
     <!-- <p>você poderá acompanhar seu historico de vendas aqui.</p> -->
