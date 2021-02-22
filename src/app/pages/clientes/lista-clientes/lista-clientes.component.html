@@ -5,7 +5,7 @@
   </ol>
 </nav>
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-md">
     <h1 class="h2 border-left pl-2">
       Clientes
@@ -16,10 +16,24 @@
       + Novo Cliente
     </a>
   </div>
-</div>
+</div> -->
 
 <div class="card">
-  <table class="table table-hover mt-5">
+  <div class="cs-accent-card"></div>
+  <div class="cs-card-header">
+    Clientes
+    <div class="header">
+      <a routerLink="novo" class="btn btn-success float-right">
+        + Novo Cliente
+      </a>
+    </div>
+  </div>
+  <div class="empty-state-list cs-card-content" *ngIf="!clientes || clientes.length == 0">
+    <img src="../../../../assets/images/empty-state.svg" alt="">
+    <h2>Nenhum cliente encontrado de acordo com os filtros aplicados</h2>
+    <!-- <p>você poderá acompanhar seu historico de vendas aqui.</p> -->
+  </div>
+  <table *ngIf="clientes && clientes.length > 0" class="table table-hover">
     <thead>
       <tr>
         <th>Cliente</th>
@@ -42,7 +56,7 @@
       </tr>
     </tbody>
   </table>
-  <app-paginador [totalDeItens]="quantidadeTotalDeItens || 0" [pageSize]="pageSize"
+  <app-paginador *ngIf="clientes && clientes.length > 0" [totalDeItens]="quantidadeTotalDeItens || 0" [pageSize]="pageSize"
     (aoMudarDePagina)="obtenhaTodos($event)">
   </app-paginador>
 </div>
