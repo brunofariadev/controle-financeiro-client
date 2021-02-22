@@ -51,3 +51,24 @@
     align-items: center;
     justify-content: flex-end;
 }
+
+.totais {
+    // font-weight: 300;
+    font-size: 14px;
+    text-align: center;
+    padding: 5px;
+
+    .recebido {
+        font-size: 16px;
+        color: #9fcc3b;
+    }
+
+    .a-receber {
+        font-size: 16px;
+        color: #cc623b;
+    }
+
+    .total {
+        font-size: 16px;
+    }
+}
