@@ -28,6 +28,39 @@
       </a>
     </div>
   </div>
+  <div class="search cs-card-content">
+    <form [formGroup]="buscaForm" (submit)="submitBuscaForm(1)">
+      <div class="form-row">
+        <div class="form-group col-md-5">
+          <label for="clienteId">Cliente</label>
+          <p-dropdown #dd placeholder="Selecione..." [options]="clientes" formControlName="clienteId" filter="true"
+            [style]="{'width':'100%'}"></p-dropdown>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="dataInicio">Data início da sessão</label>
+          <p-calendar id="dataInicio" formControlName="dataInicio" inputStyleClass="form-control" dataType="string"
+            dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true" autoWidth="false" [style]="{'width':'100%'}">
+          </p-calendar>
+          <div class="text-danger" *ngIf="buscaForm.get('dataInicio').invalid && buscaForm.get('dataInicio').touched">
+            <div *ngIf="buscaForm.get('dataInicio').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="dataFim">Data fim da sessão</label>
+          <p-calendar id="dataFim" formControlName="dataFim" inputStyleClass="form-control" dataType="string"
+            dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true" autoWidth="false" [style]="{'width':'100%'}">
+          </p-calendar>
+          <div class="text-danger" *ngIf="buscaForm.get('dataFim').invalid && buscaForm.get('dataFim').touched">
+            <div *ngIf="buscaForm.get('dataFim').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <button [disabled]="buscaForm.invalid" type="submit" class="btn btn-outline-primary btn-sm ml-2 float-right"
+            style="margin-top: 35px;">Buscar</button>
+        </div>
+      </div>
+    </form>
+  </div>
   <div class="empty-state-list cs-card-content" *ngIf="!sessoes || sessoes.length == 0">
     <img src="../../../../assets/images/empty-state.svg" alt="">
     <h2>Nenhuma sessão encontrada de acordo com os filtros aplicados</h2>
@@ -52,7 +85,7 @@
       </tr>
     </tbody>
   </table>
-  <app-paginador *ngIf="sessoes && sessoes.length > 0" [totalDeItens]="quantidadeTotalDeItens || 0" [pageSize]="pageSize"
-    (aoMudarDePagina)="obtenhaTodas($event)">
+  <app-paginador *ngIf="sessoes && sessoes.length > 0" [totalDeItens]="quantidadeTotalDeItens || 0"
+    [pageSize]="pageSize" (aoMudarDePagina)="obtenhaTodas($event)">
   </app-paginador>
 </div>
