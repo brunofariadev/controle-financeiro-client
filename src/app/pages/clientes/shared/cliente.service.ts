@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 
 import { Observable, throwError } from 'rxjs';
 import { map, catchError, flatMap } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { map, catchError, flatMap } from 'rxjs/operators';
 import { Cliente } from './cliente.model';
 import { environment } from 'src/environments/environment';
 import { PagedList } from 'src/app/shared/models/paged-list.model';
+import { FiltrosCliente } from './filtros-cliente.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,14 @@ export class ClienteService {
   getAll(page: number = 1, pageSize: number = 3): Observable<PagedList<Cliente>> {
     let url = `${this.apiPath}?page=${page}&pageSize=${pageSize}`;
     return this.http.get(url).pipe(
+      catchError(this.handleError),
+      map(this.jsonDataToClientes)
+    );
+  }
+
+  buscarClientes(filtros: FiltrosCliente): Observable<PagedList<Cliente>> {
+    let url = `${this.apiPath}/buscar`;
+    return this.http.get(url, { params: this.getParams(filtros) }).pipe(
       catchError(this.handleError),
       map(this.jsonDataToClientes)
     );
@@ -73,7 +82,7 @@ export class ClienteService {
     pagedList.Items = clientes;
     pagedList.TotalItems = jsonDataToClientes.totalItems;
     pagedList.PageSize = jsonDataToClientes.pageSize;
-    
+
     return pagedList;
   }
 
@@ -82,4 +91,23 @@ export class ClienteService {
     return throwError(erro);
   }
 
+  getParams(objeto: any): HttpParams {
+    let params = new HttpParams();
+    Object.keys(objeto).forEach((key) => {
+      if (objeto[key]) {
+        if (objeto[key] instanceof Array) {
+          objeto[key].forEach((element) => {
+            params = params.append(key.toString(), element);
+          });
+        } else if (typeof objeto[key] === 'object') {
+          Object.keys(objeto[key]).forEach((k) => {
+            params = params.append(key.toString() + '.' + k.toString(), objeto[key][k]);
+          });
+        } else {
+          params = params.set(key.toString(), objeto[key].toString());
+        }
+      }
+    });
+    return params;
+  }
 }
