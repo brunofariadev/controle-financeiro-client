@@ -19,7 +19,6 @@ export class ListaClientesComponent implements OnInit {
   constructor(private clienteService: ClienteService) { }
 
   ngOnInit() {
-    this.obtenhaTodos(1);
     this.submitBuscaForm(1);
   }
 
@@ -40,20 +39,14 @@ export class ListaClientesComponent implements OnInit {
   }
 
   mapearFiltro(currentPagina: number): FiltrosCliente {
-    let filtros: FiltrosCliente = new FiltrosCliente();
-    filtros.page = currentPagina;
-    filtros.pageSize = 3;
+    if (this.filtros == null) {
+      this.filtros = new FiltrosCliente();
+    }
 
-    return filtros;
-  }
+    this.filtros.page = currentPagina;
+    this.filtros.pageSize = 3;
 
-  public obtenhaTodos(page: number) {
-    this.clienteService.getAll(page).subscribe(pagedClientes => {
-      this.clientes = pagedClientes.Items;
-      this.quantidadeTotalDeItens = pagedClientes.TotalItems;
-      this.pageSize = pagedClientes.PageSize;
-    },
-      error => alert("erro ao carregar lista"));
+    return this.filtros;
   }
 
   public buscar(nomeCliente: string) {

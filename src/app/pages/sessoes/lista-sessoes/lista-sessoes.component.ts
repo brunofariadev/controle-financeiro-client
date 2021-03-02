@@ -46,7 +46,6 @@ export class ListaSessoesComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    // this.obtenhaTodas(1);
     this.loadClientes();
     this.buildBuscaForm();
     this.submitBuscaForm(1);
@@ -80,15 +79,6 @@ export class ListaSessoesComponent implements OnInit {
     filtros.pageSize = 3;
 
     return filtros;
-  }
-
-  public obtenhaTodas(currentPage: number) {
-    this.sessaoService.getAll(currentPage).subscribe(pagedSessoes => {
-      this.sessoes = pagedSessoes.Items;
-      this.quantidadeTotalDeItens = pagedSessoes.TotalItems;
-      this.pageSize = pagedSessoes.PageSize;
-    },
-      error => alert("erro ao carregar lista"));
   }
 
   buildBuscaForm(): any {

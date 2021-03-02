@@ -86,6 +86,6 @@
     </tbody>
   </table>
   <app-paginador *ngIf="sessoes && sessoes.length > 0" [totalDeItens]="quantidadeTotalDeItens || 0"
-    [pageSize]="pageSize" (aoMudarDePagina)="obtenhaTodas($event)">
+    [pageSize]="pageSize" (aoMudarDePagina)="submitBuscaForm($event)">
   </app-paginador>
 </div>
