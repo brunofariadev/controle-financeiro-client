@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://controle-simples-api-dev.us-east-2.elasticbeanstalk.com/'
-  //API_URL: 'https://localhost:5001/'
+  API_URL: 'https://controle-simples-api.herokuapp.com/'
+  // API_URL: 'https://localhost:5001/'
 };
 
 /*
