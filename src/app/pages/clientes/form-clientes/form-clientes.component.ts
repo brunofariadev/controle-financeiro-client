@@ -43,7 +43,7 @@ export class FormClientesComponent implements OnInit, AfterContentChecked {
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder
-  ) {  }
+  ) { }
 
   ngAfterContentChecked(): void {
     this.setPageTitle();
@@ -62,7 +62,7 @@ export class FormClientesComponent implements OnInit, AfterContentChecked {
     this.setCurrentAction();
     this.buildClienteForm();
     this.loadCliente();
-    
+
     this.sexos = UtilOptions.getOptions(Cliente.sexoEnum);
     this.estadosCivis = UtilOptions.getOptions(Cliente.estadoCivilEnum);
     this.escolaridades = UtilOptions.getOptions(Cliente.escolaridadeEnum);
@@ -101,6 +101,7 @@ export class FormClientesComponent implements OnInit, AfterContentChecked {
         estado: [null]
       }),
       observacao: [null, [Validators.maxLength(1000)]],
+      inativo: [false, [Validators.required]]
     });
   }
 

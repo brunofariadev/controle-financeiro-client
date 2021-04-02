@@ -16,6 +16,7 @@ export class Cliente {
     public email: string;
     public endereco: Endereco;
     public observacao: string;
+    public inativo: boolean;
 
     static sexoEnum = {
         1: "Masculino",
@@ -38,5 +39,9 @@ export class Cliente {
         4: 'Ensino Médio',
         5: 'Educão Superior'
     }
+
+    get DescricaoInativo(): string {
+        return this.inativo ? "Sim" : "Não";
+    } 
 }
 

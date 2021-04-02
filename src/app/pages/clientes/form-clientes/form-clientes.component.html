@@ -90,16 +90,16 @@
       </div>
       <div class="form-row">
         <div class="form-group col-md-3">
+          <label for="telefone">Telefone</label>
+          <input type="text" class="form-control" id="telefone" formControlName="telefone">
+        </div>
+        <div class="form-group col-md-2">
           <label for="rg">RG</label>
           <input type="text" class="form-control" id="rg" formControlName="rg">
         </div>
         <div class="form-group col-md-3">
           <label for="cpf">CPF</label>
           <input type="text" class="form-control" id="cpf" formControlName="cpf">
-        </div>
-        <div class="form-group col-md-3">
-          <label for="telefone">Telefone</label>
-          <input type="text" class="form-control" id="telefone" formControlName="telefone">
         </div>
         <div class="form-group col-md-3">
           <label for="valorSessao">Valor da Sessão</label>
@@ -114,6 +114,19 @@
           <div class="text-danger"
             *ngIf="clienteForm.get('valorSessao').invalid && clienteForm.get('valorSessao').touched">
             <div *ngIf="clienteForm.get('valorSessao').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group col-md-1">
+          <label for="inativo">Inativo</label>
+          <div class="btn-group">
+            <label (click)="clienteForm.get('inativo').setValue(true)"
+              [class.active]="clienteForm.get('inativo').value == true" class="btn btn-outline-success">
+              Sim
+            </label>
+            <label (click)="clienteForm.get('inativo').setValue(false)"
+              [class.active]="clienteForm.get('inativo').value == false" class="btn btn-outline-danger">
+              Não
+            </label>
           </div>
         </div>
       </div>

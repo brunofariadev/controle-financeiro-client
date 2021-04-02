@@ -78,7 +78,7 @@ export class ClienteService {
     let clientes: Cliente[] = [];
     let pagedList: PagedList<Cliente> = new PagedList<Cliente>();
 
-    jsonDataToClientes.items.forEach(e => clientes.push(e as Cliente));
+    jsonDataToClientes.items.forEach(e => clientes.push(Object.assign(new Cliente(), e)));
     pagedList.Items = clientes;
     pagedList.TotalItems = jsonDataToClientes.totalItems;
     pagedList.PageSize = jsonDataToClientes.pageSize;

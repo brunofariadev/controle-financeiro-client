@@ -16,76 +16,80 @@ export class InMemoryDatabase implements InMemoryDbService {
         endereco.numero = '575';
         endereco.logradouro = 'Rua t27, Q44';
 
-        let clientes: Cliente[] = [
-            {
-                id: '1',
-                nome: "Bruno Oliveira de Faria Tolentino",
-                cpf: "04335491140",
-                dataDeNascimento: "20/11/1991",
-                email: "brunogyn1@gmail.com",
-                rg: '5411612',
-                sexo: 1,
-                telefone: 62985568460,
-                valorSessao: 60,
-                observacao: "Lorem ashdajs akjsdkasd askjdddd qweqwe q dashd",
-                endereco: endereco,
-                escolaridade: 1,
-                estadoCivil: 1,
-                idade: 28,
-                profissao: "Desenvolvedor"
-            },
-            {
-                id: '2',
-                nome: "Diogo Souza Carvalho",
-                cpf: "14324461775",
-                dataDeNascimento: "03/03/1959",
-                email: "DiogoSouzaCarvalho@jourrapide.com",
-                rg: '5411612',
-                sexo: 1,
-                telefone: 3136379480,
-                valorSessao: 100,
-                observacao: "",
-                endereco: null,
-                escolaridade: 1,
-                estadoCivil: 1,
-                idade: 28,
-                profissao: "Desenvolvedor"
-            },
-            {
-                id: '3',
-                nome: "Bruno Oliveira de Faria",
-                cpf: "04335491140",
-                dataDeNascimento: "20/11/1991",
-                email: "brunogyn1@gmail.com",
-                rg: '5411612',
-                sexo: 1,
-                telefone: 62985568460,
-                valorSessao: 60,
-                observacao: "",
-                endereco: null,
-                escolaridade: 1,
-                estadoCivil: 1,
-                idade: 28,
-                profissao: "Desenvolvedor"
-            },
-            {
-                id: '4',
-                nome: "Bruno Oliveira de Faria",
-                cpf: "04335491140",
-                dataDeNascimento: "20/11/1991",
-                email: "brunogyn1@gmail.com",
-                rg: '5411612',
-                sexo: 1,
-                telefone: 62985568460,
-                valorSessao: 60,
-                observacao: "",
-                endereco: null,
-                escolaridade: 1,
-                estadoCivil: 1,
-                idade: 28,
-                profissao: "Desenvolvedor"
-            }
-        ];
+        // let clientes: Cliente[] = [
+        //     {
+        //         id: '1',
+        //         nome: "Bruno Oliveira de Faria Tolentino",
+        //         cpf: "04335491140",
+        //         dataDeNascimento: "20/11/1991",
+        //         email: "brunogyn1@gmail.com",
+        //         rg: '5411612',
+        //         sexo: 1,
+        //         telefone: 62985568460,
+        //         valorSessao: 60,
+        //         observacao: "Lorem ashdajs akjsdkasd askjdddd qweqwe q dashd",
+        //         endereco: endereco,
+        //         escolaridade: 1,
+        //         estadoCivil: 1,
+        //         idade: 28,
+        //         profissao: "Desenvolvedor",
+        //         inativo: false
+        //     },
+        //     {
+        //         id: '2',
+        //         nome: "Diogo Souza Carvalho",
+        //         cpf: "14324461775",
+        //         dataDeNascimento: "03/03/1959",
+        //         email: "DiogoSouzaCarvalho@jourrapide.com",
+        //         rg: '5411612',
+        //         sexo: 1,
+        //         telefone: 3136379480,
+        //         valorSessao: 100,
+        //         observacao: "",
+        //         endereco: null,
+        //         escolaridade: 1,
+        //         estadoCivil: 1,
+        //         idade: 28,
+        //         profissao: "Desenvolvedor",
+        //         inativo: false
+        //     },
+        //     {
+        //         id: '3',
+        //         nome: "Bruno Oliveira de Faria",
+        //         cpf: "04335491140",
+        //         dataDeNascimento: "20/11/1991",
+        //         email: "brunogyn1@gmail.com",
+        //         rg: '5411612',
+        //         sexo: 1,
+        //         telefone: 62985568460,
+        //         valorSessao: 60,
+        //         observacao: "",
+        //         endereco: null,
+        //         escolaridade: 1,
+        //         estadoCivil: 1,
+        //         idade: 28,
+        //         profissao: "Desenvolvedor",
+        //         inativo: false
+        //     },
+        //     {
+        //         id: '4',
+        //         nome: "Bruno Oliveira de Faria",
+        //         cpf: "04335491140",
+        //         dataDeNascimento: "20/11/1991",
+        //         email: "brunogyn1@gmail.com",
+        //         rg: '5411612',
+        //         sexo: 1,
+        //         telefone: 62985568460,
+        //         valorSessao: 60,
+        //         observacao: "",
+        //         endereco: null,
+        //         escolaridade: 1,
+        //         estadoCivil: 1,
+        //         idade: 28,
+        //         profissao: "Desenvolvedor",
+        //         inativo: false
+        //     }
+        // ];
 
         // let sessoes: Sessao[] = [
         //     { id: 1, cliente: clientes[0], dataDaSessao: "18/09/2020" } as Sessao,
@@ -101,6 +105,8 @@ export class InMemoryDatabase implements InMemoryDbService {
         //     { id: 4, tipo: "Sessao", sessaoId: sessoes[3].id, sessao: sessoes[3], valorAReceber: 90.00, foiPago: false } as Receita
         // ];
 
-        return { clientes };
+        // return { clientes };
+
+        return {};
     }
 }

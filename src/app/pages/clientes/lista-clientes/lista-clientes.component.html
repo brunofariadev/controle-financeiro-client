@@ -34,7 +34,8 @@
         <div class="input-group-prepend">
           <span class="input-group-text bg-white"><i class="fa fa-search"></i></span>
         </div>
-        <input type="search" placeholder="Digite o nome do cliente" class="form-control border-left-0" (input)="buscar($event.target.value)" > 
+        <input type="search" placeholder="Digite o nome do cliente" class="form-control border-left-0"
+          (input)="buscar($event.target.value)">
       </div>
     </div>
   </div>
@@ -50,6 +51,7 @@
         <th>E-mail</th>
         <th>Telefone</th>
         <th>Valor por sessão</th>
+        <th>Inativo</th>
         <th></th>
       </tr>
     </thead>
@@ -59,6 +61,11 @@
         <td>{{cliente.email}}</td>
         <td>{{cliente.telefone}}</td>
         <td>{{cliente.valorSessao}}</td>
+        <td>
+          <strong [class.text-success]="!cliente.inativo" [class.text-danger]="cliente.inativo">
+            {{cliente.DescricaoInativo}}
+          </strong>
+        </td>
         <td>
           <a [routerLink]="[cliente.id, 'edite']" class="btn btn-outline-info btn-sm">Editar</a>
           <button (click)="Remova(cliente)" class="btn btn-outline-danger btn-sm ml-2">Excluir</button>
