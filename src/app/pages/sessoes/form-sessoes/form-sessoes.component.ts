@@ -8,7 +8,6 @@ import { switchMap } from 'rxjs/operators';
 
 import toastr from 'toastr';
 import { ClienteService } from '../../clientes/shared/cliente.service';
-import { Cliente } from '../../clientes/shared/cliente.model';
 
 @Component({
   selector: 'app-form-sessoes',
@@ -82,6 +81,7 @@ export class FormSessoesComponent implements OnInit, AfterContentChecked {
       id: ['00000000-0000-0000-0000-000000000000'],
       clienteId: [0, [Validators.required]],
       dataDaSessao: [null, [Validators.required]],
+      horaDaSessao: [null],
     });
   }
 
@@ -90,6 +90,7 @@ export class FormSessoesComponent implements OnInit, AfterContentChecked {
       this.route.paramMap.pipe(
         switchMap(params => this.sessaoService.getById(params.get("id")))
       ).subscribe(sessao => {
+        sessao.horaDaSessao = sessao.horaDaSessao.substring(0, 5);
         this.sessao = sessao;
         this.sessao.dataDaSessao = sessao.dataDaSessao.substring(0, sessao.dataDaSessao.lastIndexOf("T")).split("-").reverse().join("/");
         this.sessaoForm.patchValue(sessao);
@@ -108,13 +109,19 @@ export class FormSessoesComponent implements OnInit, AfterContentChecked {
   }
 
   createSessao(): any {
-    let sessao: Sessao = Object.assign(new Sessao(), this.sessaoForm.value);
-    sessao.dataDaSessao = sessao.dataDaSessao.split("/").reverse().join("-");
+    let sessao: Sessao = this.CriarSessao();
 
     this.sessaoService.create(sessao).subscribe(
       sessao => this.actionFormSuccess(sessao),
       error => this.actionsFormError(error)
     )
+  }
+
+  private CriarSessao() {
+    let sessao: Sessao = Object.assign(new Sessao(), this.sessaoForm.value);
+    sessao.dataDaSessao = sessao.dataDaSessao.split("/").reverse().join("-");
+
+    return sessao;
   }
 
   actionFormSuccess(sessao: Sessao): any {
@@ -138,8 +145,7 @@ export class FormSessoesComponent implements OnInit, AfterContentChecked {
   }
 
   updateSessao(): any {
-    let sessao: Sessao = Object.assign(new Sessao(), this.sessaoForm.value);
-    sessao.dataDaSessao = sessao.dataDaSessao.split("/").reverse().join("-");
+    let sessao: Sessao = this.CriarSessao();
 
     this.sessaoService.update(sessao).subscribe(
       sessao => this.actionFormSuccess(sessao),
@@ -157,4 +163,4 @@ export class ClienteOption {
     this.value = value;
   }
 
-} 
+}

@@ -5,6 +5,7 @@ export class Sessao {
     public cliente: Cliente;
     public clienteId: string;
     public dataDaSessao: string;
+    public horaDaSessao: string;
 
     get NomeDoCliente(): string {
         return this.cliente.nome;
