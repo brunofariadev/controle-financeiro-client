@@ -103,7 +103,7 @@ export class ListaReceitasComponent implements OnInit {
     filtros.dataInicio = filtros.dataInicio.split("/").reverse().join("-");
     filtros.dataFim = filtros.dataFim.split("/").reverse().join("-");
     filtros.page = currentPagina;
-    filtros.pageSize = 3;
+    filtros.pageSize = 10;
 
     return filtros;
   }

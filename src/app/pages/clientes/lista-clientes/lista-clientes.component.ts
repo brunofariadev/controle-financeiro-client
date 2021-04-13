@@ -44,7 +44,7 @@ export class ListaClientesComponent implements OnInit {
     }
 
     this.filtros.page = currentPagina;
-    this.filtros.pageSize = 3;
+    this.filtros.pageSize = 10;
 
     return this.filtros;
   }
