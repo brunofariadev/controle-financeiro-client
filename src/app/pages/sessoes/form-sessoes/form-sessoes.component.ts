@@ -90,7 +90,7 @@ export class FormSessoesComponent implements OnInit, AfterContentChecked {
       this.route.paramMap.pipe(
         switchMap(params => this.sessaoService.getById(params.get("id")))
       ).subscribe(sessao => {
-        sessao.horaDaSessao = sessao.horaDaSessao.substring(0, 5);
+        sessao.horaDaSessao = sessao.horaDaSessao ? sessao.horaDaSessao.substring(0, 5) : null;
         this.sessao = sessao;
         this.sessao.dataDaSessao = sessao.dataDaSessao.substring(0, sessao.dataDaSessao.lastIndexOf("T")).split("-").reverse().join("/");
         this.sessaoForm.patchValue(sessao);
