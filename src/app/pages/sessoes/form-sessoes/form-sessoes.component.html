@@ -43,7 +43,8 @@
         <div class="form-group col-md-2">
           <label for="dataDaSessao">Data da sessão</label>
           <p-calendar id="dataDaSessao" formControlName="dataDaSessao" inputStyleClass="form-control" dataType="string"
-            dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true" [style]="{'width':'100%'}">
+            dateFormat="dd/mm/yy" [locale]="ptBR" [monthNavigator]="true" [yearNavigator]="true" yearRange="1920:2022"
+            [showButtonBar]="true" [style]="{'width':'100%'}">
           </p-calendar>
         </div>
         <div class="form-group col-md-2">

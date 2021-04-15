@@ -39,7 +39,8 @@
         <div class="form-group col-md-3">
           <label for="dataInicio">Data início da sessão</label>
           <p-calendar id="dataInicio" formControlName="dataInicio" inputStyleClass="form-control" dataType="string"
-            dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true" autoWidth="false" [style]="{'width':'100%'}">
+            dateFormat="dd/mm/yy" [locale]="ptBR" [monthNavigator]="true" [yearNavigator]="true" yearRange="1920:2022"
+            [showButtonBar]="true" [showButtonBar]="true" autoWidth="false" [style]="{'width':'100%'}">
           </p-calendar>
           <div class="text-danger" *ngIf="buscaForm.get('dataInicio').invalid && buscaForm.get('dataInicio').touched">
             <div *ngIf="buscaForm.get('dataInicio').errors.required">Dado obrigatório</div>
@@ -48,7 +49,8 @@
         <div class="form-group col-md-3">
           <label for="dataFim">Data fim da sessão</label>
           <p-calendar id="dataFim" formControlName="dataFim" inputStyleClass="form-control" dataType="string"
-            dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true" autoWidth="false" [style]="{'width':'100%'}">
+            dateFormat="dd/mm/yy" [locale]="ptBR" [monthNavigator]="true" [yearNavigator]="true" yearRange="1920:2022"
+            [showButtonBar]="true" [showButtonBar]="true" autoWidth="false" [style]="{'width':'100%'}">
           </p-calendar>
           <div class="text-danger" *ngIf="buscaForm.get('dataFim').invalid && buscaForm.get('dataFim').touched">
             <div *ngIf="buscaForm.get('dataFim').errors.required">Dado obrigatório</div>

@@ -62,7 +62,8 @@
         <div class="form-group col-md-2">
           <label for="dataDeNascimento">Data do nascimento</label>
           <p-calendar id="dataDeNascimento" formControlName="dataDeNascimento" inputStyleClass="form-control"
-            dataType="string" dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true" [style]="{'width':'100%'}">
+            dataType="string" dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true" [monthNavigator]="true"
+            [yearNavigator]="true" yearRange="1920:2022" [style]="{'width':'100%'}">
           </p-calendar>
           <div class="text-danger"
             *ngIf="clienteForm.get('dataDeNascimento').invalid && clienteForm.get('dataDeNascimento').touched">
