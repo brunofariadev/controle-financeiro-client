@@ -175,4 +175,10 @@ export class FormClientesComponent implements OnInit, AfterContentChecked {
       error => this.actionsFormError(error)
     )
   }
+
+  changeInputValue(valor: string) {
+    this.clienteForm.get("valorSessao").setValue(valor.replace('.', '').replace(',', '.'));
+  }
+
+
 }

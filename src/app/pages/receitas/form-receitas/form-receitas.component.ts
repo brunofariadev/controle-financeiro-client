@@ -193,6 +193,10 @@ export class FormReceitasComponent implements OnInit, AfterContentChecked {
       error => this.actionsFormError(error)
     )
   }
+
+  changeInputValue(valor: string) {
+    this.receitaForm.get("valorAReceber").setValue(valor.replace('.', '').replace(',', '.'));
+  }
 }
 
 export class SessaoOption {
@@ -204,4 +208,4 @@ export class SessaoOption {
     this.value = value;
   }
 
-} 
+}

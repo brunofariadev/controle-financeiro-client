@@ -108,8 +108,8 @@
             <div class="input-group-prepend">
               <div class="input-group-text">R$</div>
             </div>
-            <input currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }" type="text"
-              class="form-control text-right" id="valorSessao" formControlName="valorSessao">
+            <input type="text" class="form-control text-right" id="valorSessao" formControlName="valorSessao"
+              currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }" (input)="changeInputValue($event.target.value)">
           </div>
 
           <div class="text-danger"
@@ -121,11 +121,11 @@
           <label for="inativo">Inativo</label>
           <div class="btn-group">
             <label (click)="clienteForm.get('inativo').setValue(true)"
-              [class.active]="clienteForm.get('inativo').value == true" class="btn btn-outline-success">
+              [class.active]="clienteForm.get('inativo').value == true" class="btn btn-outline-danger">
               Sim
             </label>
             <label (click)="clienteForm.get('inativo').setValue(false)"
-              [class.active]="clienteForm.get('inativo').value == false" class="btn btn-outline-danger">
+              [class.active]="clienteForm.get('inativo').value == false" class="btn btn-outline-success">
               Não
             </label>
           </div>
