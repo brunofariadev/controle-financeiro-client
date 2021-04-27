@@ -79,7 +79,7 @@ export class FormSessoesComponent implements OnInit, AfterContentChecked {
   buildSessaoForm(): any {
     this.sessaoForm = this.formBuilder.group({
       id: ['00000000-0000-0000-0000-000000000000'],
-      clienteId: [0, [Validators.required]],
+      clienteId: [null, [Validators.required]],
       dataDaSessao: [null, [Validators.required]],
       horaDaSessao: [null],
     });
@@ -99,6 +99,12 @@ export class FormSessoesComponent implements OnInit, AfterContentChecked {
   }
 
   submitForm() {
+    this.sessaoForm.markAllAsTouched();
+
+    if (this.sessaoForm.invalid) {
+      return;
+    }
+
     this.submittingForm = true;
 
     if (this.currentAction == Util.pathNovo) {

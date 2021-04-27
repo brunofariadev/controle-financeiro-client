@@ -98,14 +98,14 @@ export class FormReceitasComponent implements OnInit, AfterContentChecked {
   buildReceitaForm(): any {
     this.receitaForm = this.formBuilder.group({
       id: ["00000000-0000-0000-0000-000000000000"],
-      tipoDaReceita: [0, [Validators.required]],
-      sessaoId: ['00000000-0000-0000-0000-000000000000'],
-      descricao: [null, [Validators.maxLength(100)]],
+      tipoDaReceita: [null, [Validators.required]],
+      sessaoId: [null, [Validators.required]],
+      descricao: [null, [Validators.maxLength(100), Validators.required]],
       formaDePagamento: [null],
       valorAReceber: [null, [Validators.required]],
       foiPago: [false, [Validators.required]],
-      dataDoPagamento: [null],
-      dataDoVencimento: [null],
+      dataDoPagamento: [null, [Validators.required]],
+      dataDoVencimento: [null, [Validators.required]],
       observacao: [null, [Validators.maxLength(1000)]],
     });
   }
@@ -132,7 +132,48 @@ export class FormReceitasComponent implements OnInit, AfterContentChecked {
     }
   }
 
+
   submitForm() {
+    this.receitaForm.markAllAsTouched();
+    
+    let campos = ["id", "tipoDaReceita", "sessaoId", "descricao", "formaDePagamento", "valorAReceber", "foiPago", "dataDoPagamento", "dataDoVencimento", "observacao"]
+
+    for (let index = 0; index < 10; index++) {
+      const element = campos[index];
+
+      if (element == "sessaoId") {
+        if (this.receitaForm.get('tipoDaReceita').value == '1' && !this.receitaForm.controls[element].valid) {
+          return;
+        }
+        continue;
+      }
+
+      if (element == "descricao") {
+        if (this.receitaForm.get('tipoDaReceita').value == '2' && !this.receitaForm.controls[element].valid) {
+          return;
+        }
+        continue;
+      }
+
+      if (element == "descricao") {
+        if (this.receitaForm.get('tipoDaReceita').value == '2' && !this.receitaForm.controls[element].valid) {
+          return;
+        }
+        continue;
+      }
+
+      if (element == "dataDoPagamento") {
+        if (this.receitaForm.get('foiPago').value && !this.receitaForm.controls[element].valid) {
+          return;
+        }
+        continue;
+      }
+
+      if (!this.receitaForm.controls[element].valid) {
+        return;
+      }
+    }
+
     this.submittingForm = true;
 
     if (this.currentAction == Util.pathNovo) {

@@ -118,6 +118,12 @@ export class FormClientesComponent implements OnInit, AfterContentChecked {
   }
 
   submitForm() {
+    this.clienteForm.markAllAsTouched();
+    
+    if (this.clienteForm.invalid) {
+      return;
+    }
+    
     this.submittingForm = true;
 
     if (this.currentAction == Util.pathNovo) {

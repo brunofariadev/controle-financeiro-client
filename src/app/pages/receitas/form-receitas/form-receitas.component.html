@@ -28,7 +28,6 @@
 
           <select [(ngModel)]="selectedTipo" name="tipoDaReceita" id="tipoDaReceita" formControlName="tipoDaReceita"
             class="form-control">
-            <option value="0">Selecione...</option>
             <option *ngFor="let tipo of tipos" [value]="tipo.value">{{tipo.text}}</option>
           </select>
 
@@ -49,9 +48,10 @@
             </option>
           </select> -->
 
-          <div class="text-danger" *ngIf="receitaForm.get('tipoDaReceita').value == '1' && (receitaForm.get('tipoDaReceita').value == 0 || 
-          (receitaForm.get('sessaoId').invalid && receitaForm.get('sessaoId').touched))">
-            <div *ngIf="receitaForm.get('sessaoId').errors.required">Dado obrigatório</div>
+          <div class="text-danger" *ngIf="receitaForm.get('sessaoId').touched">
+            <div
+              *ngIf="receitaForm.get('tipoDaReceita').value == '1' && receitaForm.get('sessaoId').invalid && receitaForm.get('sessaoId').errors.required">
+              Dado obrigatório</div>
           </div>
         </div>
         <div [hidden]="receitaForm.get('tipoDaReceita').value != '2'" class="form-group col-md-8">
@@ -74,6 +74,10 @@
             <input currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' }" type="text"
               class="form-control text-right" id="valorAReceber" formControlName="valorAReceber"
               (input)="changeInputValue($event.target.value)">
+          </div>
+          <div class="text-danger"
+            *ngIf="receitaForm.get('valorAReceber').invalid && receitaForm.get('valorAReceber').touched">
+            <div *ngIf="receitaForm.get('valorAReceber').errors.required">Dado obrigatório</div>
           </div>
         </div>
         <div class="form-group col-md-2">
@@ -108,6 +112,11 @@
             [monthNavigator]="true" [yearNavigator]="true" yearRange="2020:2022" [style]="{'width':'100%'}"
             [locale]="ptBR" [showButtonBar]="true">
           </p-calendar>
+
+          <div class="text-danger"
+            *ngIf="receitaForm.get('foiPago').value == true && receitaForm.get('dataDoPagamento').invalid && receitaForm.get('dataDoPagamento').touched">
+            <div *ngIf="receitaForm.get('dataDoPagamento').errors.required">Dado obrigatório</div>
+          </div>
         </div>
         <div class="form-group col-md-3">
           <label for="formaDePagamento">Forma de pagamento</label>
