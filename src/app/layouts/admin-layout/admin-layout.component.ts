@@ -12,6 +12,7 @@ export class AdminLayoutComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    $('#sidebar, #content').toggleClass('active');
   }
 
   sidebarCollapse() {
