@@ -54,7 +54,7 @@
   <div class="search cs-card-content">
     <form [formGroup]="buscaForm" (submit)="submitBuscaForm(1)">
       <div class="form-row">
-        <div class="form-group col-md-5">
+        <div class="form-group col-md-3">
           <label for="clienteId">Cliente</label>
           <p-dropdown #dd placeholder="Selecione..." [options]="clientes" formControlName="clienteId" filter="true"
             [style]="{'width':'100%'}"></p-dropdown>
@@ -69,23 +69,71 @@
             </select> -->
         </div>
         <div class="form-group col-md-2">
-          <label for="dataInicio">Data início do vencimento</label>
-          <p-calendar id="dataInicio" formControlName="dataInicio" inputStyleClass="form-control" dataType="string"
+          <label for="tipoDeFiltroPeriodoReceita">Tipo de período</label>
+
+          <select name="tipoDeFiltroPeriodoReceita" id="tipoDeFiltroPeriodoReceita" formControlName="tipoDeFiltroPeriodoReceita"
+            class="form-control">
+            <option *ngFor="let tipo of tiposPeriodos" [value]="tipo.value">{{tipo.text}}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-2" [hidden]="buscaForm.get('tipoDeFiltroPeriodoReceita').value != '1'">
+          <label for="dataInicioVencimento">Data início do vencimento</label>
+          <p-calendar id="dataInicioVencimento" formControlName="dataInicioVencimento" inputStyleClass="form-control" dataType="string"
             dateFormat="dd/mm/yy" [locale]="ptBR" [monthNavigator]="true" [yearNavigator]="true" yearRange="2020:2022"
             [showButtonBar]="true" autoWidth="false" [style]="{'width':'100%'}">
           </p-calendar>
-          <div class="text-danger" *ngIf="buscaForm.get('dataInicio').invalid && buscaForm.get('dataInicio').touched">
-            <div *ngIf="buscaForm.get('dataInicio').errors.required">Dado obrigatório</div>
+          <div class="text-danger" *ngIf="buscaForm.get('dataInicioVencimento').invalid && buscaForm.get('dataInicioVencimento').touched">
+            <div *ngIf="buscaForm.get('dataInicioVencimento').errors.required">Dado obrigatório</div>
           </div>
         </div>
-        <div class="form-group col-md-2">
-          <label for="dataFim">Data fim do vencimento</label>
-          <p-calendar id="dataFim" formControlName="dataFim" inputStyleClass="form-control" dataType="string"
+        <div class="form-group col-md-2" [hidden]="buscaForm.get('tipoDeFiltroPeriodoReceita').value != '1'">
+          <label for="dataFimVencimento">Data fim do vencimento</label>
+          <p-calendar id="dataFimVencimento" formControlName="dataFimVencimento" inputStyleClass="form-control" dataType="string"
             dateFormat="dd/mm/yy" [locale]="ptBR" [monthNavigator]="true" [yearNavigator]="true" yearRange="2020:2022"
             [showButtonBar]="true" autoWidth="false" [style]="{'width':'100%'}">
           </p-calendar>
-          <div class="text-danger" *ngIf="buscaForm.get('dataFim').invalid && buscaForm.get('dataFim').touched">
-            <div *ngIf="buscaForm.get('dataFim').errors.required">Dado obrigatório</div>
+          <div class="text-danger" *ngIf="buscaForm.get('dataFimVencimento').invalid && buscaForm.get('dataFimVencimento').touched">
+            <div *ngIf="buscaForm.get('dataFimVencimento').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group col-md-2" [hidden]="buscaForm.get('tipoDeFiltroPeriodoReceita').value != '2'">
+          <label for="dataInicioSessao">Data início da sessão</label>
+          <p-calendar id="dataInicioSessao" formControlName="dataInicioSessao" inputStyleClass="form-control" dataType="string"
+            dateFormat="dd/mm/yy" [locale]="ptBR" [monthNavigator]="true" [yearNavigator]="true" yearRange="2020:2022"
+            [showButtonBar]="true" autoWidth="false" [style]="{'width':'100%'}">
+          </p-calendar>
+          <div class="text-danger" *ngIf="buscaForm.get('dataInicioSessao').invalid && buscaForm.get('dataInicioSessao').touched">
+            <div *ngIf="buscaForm.get('dataInicioSessao').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group col-md-2" [hidden]="buscaForm.get('tipoDeFiltroPeriodoReceita').value != '2'">
+          <label for="dataFimSessao">Data fim da sessão</label>
+          <p-calendar id="dataFimSessao" formControlName="dataFimSessao" inputStyleClass="form-control" dataType="string"
+            dateFormat="dd/mm/yy" [locale]="ptBR" [monthNavigator]="true" [yearNavigator]="true" yearRange="2020:2022"
+            [showButtonBar]="true" autoWidth="false" [style]="{'width':'100%'}">
+          </p-calendar>
+          <div class="text-danger" *ngIf="buscaForm.get('dataFimSessao').invalid && buscaForm.get('dataFimSessao').touched">
+            <div *ngIf="buscaForm.get('dataFimSessao').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group col-md-2" [hidden]="buscaForm.get('tipoDeFiltroPeriodoReceita').value != '3'">
+          <label for="dataInicioPagamento">Data início do pagamento</label>
+          <p-calendar id="dataInicioPagamento" formControlName="dataInicioPagamento" inputStyleClass="form-control" dataType="string"
+            dateFormat="dd/mm/yy" [locale]="ptBR" [monthNavigator]="true" [yearNavigator]="true" yearRange="2020:2022"
+            [showButtonBar]="true" autoWidth="false" [style]="{'width':'100%'}">
+          </p-calendar>
+          <div class="text-danger" *ngIf="buscaForm.get('dataInicioPagamento').invalid && buscaForm.get('dataInicioPagamento').touched">
+            <div *ngIf="buscaForm.get('dataInicioPagamento').errors.required">Dado obrigatório</div>
+          </div>
+        </div>
+        <div class="form-group col-md-2" [hidden]="buscaForm.get('tipoDeFiltroPeriodoReceita').value != '3'">
+          <label for="dataFimPagamento">Data fim do pagamento</label>
+          <p-calendar id="dataFimPagamento" formControlName="dataFimPagamento" inputStyleClass="form-control" dataType="string"
+            dateFormat="dd/mm/yy" [locale]="ptBR" [monthNavigator]="true" [yearNavigator]="true" yearRange="2020:2022"
+            [showButtonBar]="true" autoWidth="false" [style]="{'width':'100%'}">
+          </p-calendar>
+          <div class="text-danger" *ngIf="buscaForm.get('dataFimPagamento').invalid && buscaForm.get('dataFimPagamento').touched">
+            <div *ngIf="buscaForm.get('dataFimPagamento').errors.required">Dado obrigatório</div>
           </div>
         </div>
         <div class="form-group col-md-2">

@@ -42,6 +42,7 @@ export class ListaReceitasComponent implements OnInit {
   quantidadeTotalDeItens: number = 0;
   pageSize: number = 0;
   situacoes: Array<any>;
+  tiposPeriodos: Array<any>;
 
   constructor(private receitaService: ReceitaService,
     private clienteService: ClienteService,
@@ -55,13 +56,19 @@ export class ListaReceitasComponent implements OnInit {
     this.submitBuscaForm(1);
 
     this.situacoes = UtilOptions.getOptions(FiltrosReceita.situacoes);
+    this.tiposPeriodos = UtilOptions.getOptions(FiltrosReceita.tiposFiltroPeriodos);
   }
 
   buildBuscaForm(): any {
     this.buscaForm = this.formBuilder.group({
       clienteId: ["00000000-0000-0000-0000-000000000000"],
-      dataInicio: [this.obtenhaIncioDoMesCorrente(), [Validators.required]],
-      dataFim: [this.obtenhaFimDoMesCorrente(), [Validators.required]],
+      tipoDeFiltroPeriodoReceita: [1],
+      dataInicioVencimento: [this.obtenhaIncioDoMesCorrente()],
+      dataFimVencimento: [this.obtenhaFimDoMesCorrente()],
+      dataInicioSessao: [this.obtenhaIncioDoMesCorrente()],
+      dataFimSessao: [this.obtenhaFimDoMesCorrente()],
+      dataInicioPagamento: [this.obtenhaIncioDoMesCorrente()],
+      dataFimPagamento: [this.obtenhaFimDoMesCorrente()],
       situacao: [0]
     });
   }
@@ -100,8 +107,12 @@ export class ListaReceitasComponent implements OnInit {
 
   private mapearFiltroReceita(currentPagina: number) {
     let filtros: FiltrosReceita = Object.assign(new FiltrosReceita(), this.buscaForm.value);
-    filtros.dataInicio = filtros.dataInicio.split("/").reverse().join("-");
-    filtros.dataFim = filtros.dataFim.split("/").reverse().join("-");
+    filtros.dataInicioVencimento = filtros.dataInicioVencimento.split("/").reverse().join("-");
+    filtros.dataFimVencimento = filtros.dataFimVencimento.split("/").reverse().join("-");
+    filtros.dataInicioSessao = filtros.dataInicioSessao.split("/").reverse().join("-");
+    filtros.dataFimSessao = filtros.dataFimSessao.split("/").reverse().join("-");
+    filtros.dataInicioPagamento = filtros.dataInicioPagamento.split("/").reverse().join("-");
+    filtros.dataFimPagamento = filtros.dataFimPagamento.split("/").reverse().join("-");
     filtros.page = currentPagina;
     filtros.pageSize = 10;
 
